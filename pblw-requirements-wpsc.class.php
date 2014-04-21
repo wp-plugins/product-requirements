@@ -1,13 +1,13 @@
 <?php
 
-class PblwRequirementsWc {
+class PblwRequirementsWpsc {
 
 	/**
 	 * Constructor. Attach to hooks as required.
 	 */
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
-		add_action( 'woocommerce_process_product_meta', array( $this, 'save_requirements' ) );
+		add_action( 'wpsc_edit_product', array( $this, 'save_requirements' ) );
 	}
 
 	/**
@@ -18,7 +18,7 @@ class PblwRequirementsWc {
 			'pblw-requirements',
 			__( 'Requirements', 'pblw_reqs' ),
 			array( $this, 'render_metabox' ),
-			'product',
+			'wpsc-product',
 			'normal',
 			'core'
 		);
