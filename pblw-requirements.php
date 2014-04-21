@@ -5,7 +5,7 @@ Description: Support for products to have "Requirements" recorded against them, 
 Plugin URI: http://plugins.leewillis.co.uk
 Author: Lee Willis
 Author URI: http://www.leewillis.co.uk/
-Version: 1.0
+Version: 1.1
 License: GPL2
 Text Domain: pblw_reqs
 Domain Path: /languages
@@ -37,10 +37,21 @@ require_once( 'pblw-requirements-widget.class.php' );
 global $pblw_requirements_class;
 $pblw_requirements_class = new PblwRequirements();
 
-// EDD Support
-if ( defined( 'EDD_VERSION' ) &&
-	 version_compare( EDD_VERSION, '1.9' ) ) {
-	require_once( 'pblw-requirements-edd.class.php' );
-	global $pblw_requirements_ecommerce_class;
-	$pblw_requirements_ecommerce_class = new PblwRequirementsEdd();
+function pblw_requirements_plugins_loaded() {
+	// EDD Support
+	if ( defined( 'EDD_VERSION' ) &&
+		 version_compare( EDD_VERSION, '1.9' ) ) {
+		require_once( 'pblw-requirements-edd.class.php' );
+		global $pblw_requirements_ecommerce_class;
+		$pblw_requirements_ecommerce_class = new PblwRequirementsEdd();
+	}
+
+	// WooCommerce Support
+	if ( defined( 'WC_VERSION' ) &&
+		 version_compare( WC_VERSION, '2.0' ) ) {
+		require_once( 'pblw-requirements-wc.class.php' );
+		global $pblw_requirements_ecommerce_class;
+		$pblw_requirements_ecommerce_class = new PblwRequirementsWc();
+	}
 }
+add_action( 'plugins_loaded', 'pblw_requirements_plugins_loaded' );
