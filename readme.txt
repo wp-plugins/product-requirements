@@ -3,7 +3,7 @@ Contributors: leewillis77
 Donate link: http://plugins.leewillis.co.uk/
 Tags: EDD, Easy Digital Downloads, WooCommerce, WC, plugins, requirements, products
 Requires at least: 3.8
-Tested up to: 3.8
+Tested up to: 4.3
 Stable tag: 1.1
 
 == Description ==
