@@ -5,14 +5,13 @@ Description: Support for products to have "Requirements" recorded against them, 
 Plugin URI: http://plugins.leewillis.co.uk
 Author: Lee Willis
 Author URI: http://www.leewillis.co.uk/
-Version: 1.1
+Version: 1.3
 License: GPL2
 Text Domain: pblw_reqs
 Domain Path: /languages
 */
 
 /*
-
     Copyright (C) 2014  Lee Willis  wordpress.plugins@leewillis.co.uk
 
     This program is free software; you can redistribute it and/or modify
@@ -38,6 +37,7 @@ global $pblw_requirements_class;
 $pblw_requirements_class = new PblwRequirements();
 
 function pblw_requirements_plugins_loaded() {
+
 	// EDD Support
 	if ( defined( 'EDD_VERSION' ) &&
 		 version_compare( EDD_VERSION, '1.9' ) ) {
@@ -53,5 +53,14 @@ function pblw_requirements_plugins_loaded() {
 		global $pblw_requirements_ecommerce_class;
 		$pblw_requirements_ecommerce_class = new PblwRequirementsWc();
 	}
+
+	// WP e-Commerce Support
+	if ( defined( 'WPSC_VERSION' ) &&
+		 version_compare( WPSC_VERSION, '3.8' ) ) {
+		require_once( 'pblw-requirements-wpsc.class.php' );
+		global $pblw_requirements_ecommerce_class;
+		$pblw_requirements_ecommerce_class = new PblwRequirementsWpsc();
+	}
+
 }
 add_action( 'plugins_loaded', 'pblw_requirements_plugins_loaded' );
